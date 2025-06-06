@@ -1,9 +1,11 @@
 "use client"
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronRight, Shield, Truck, Clock, Star, Award, Heart, Stethoscope, Activity, Pill, Mail, Phone, MapPin, Play, CheckCircle, ArrowRight } from 'lucide-react';
-import Image from 'next/image';
-import Link from 'next/link';
+
+import React, { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { ChevronRight, Shield, Truck, Clock, Star, Award, Heart, Stethoscope, Activity, Pill, Mail, Phone, MapPin, Play, CheckCircle, ArrowRight } from 'lucide-react'
+import Image from 'next/image'
+import Link from 'next/link'
+import Navigation from '@/components/Navigation'
 
 const testimonials = [
   {
@@ -21,65 +23,47 @@ const testimonials = [
     name: "Dr. Robert Williams",
     role: "Medical Practitioner"
   }
-];
+]
 
 export default function Home() {
-  const [activeTestimonial, setActiveTestimonial] = useState(0);
-  const [email, setEmail] = useState('');
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [activeTestimonial, setActiveTestimonial] = useState(0)
+  const [email, setEmail] = useState('')
+  const [isSubmitted, setIsSubmitted] = useState(false)
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setActiveTestimonial((prev) => (prev + 1) % testimonials.length);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, []);
+      setActiveTestimonial((prev) => (prev + 1) % testimonials.length)
+    }, 4000)
+    return () => clearInterval(interval)
+  }, [])
 
   const handleSubscribe = () => {
     if (email) {
-      setIsSubmitted(true);
+      setIsSubmitted(true)
       setTimeout(() => {
-        setIsSubmitted(false);
-        setEmail('');
-      }, 3000);
+        setIsSubmitted(false)
+        setEmail('')
+      }, 3000)
     }
-  };
+  }
 
   const features = [
     { icon: <Shield className="w-8 h-8" />, title: "FDA Approved", description: "All products meet strict regulatory standards" },
     { icon: <Truck className="w-8 h-8" />, title: "Fast Delivery", description: "24-48 hour shipping to your doorstep" },
     { icon: <Clock className="w-8 h-8" />, title: "24/7 Support", description: "Round-the-clock customer assistance" },
     { icon: <Award className="w-8 h-8" />, title: "Quality Assured", description: "Premium medical-grade supplies only" }
-  ];
+  ]
 
   const products = [
     { icon: <Stethoscope className="w-12 h-12" />, title: "Diagnostic Equipment", description: "Professional-grade tools", items: ["Stethoscopes", "Blood Pressure Monitors", "Thermometers"] },
     { icon: <Activity className="w-12 h-12" />, title: "Surgical Supplies", description: "Sterile instruments", items: ["Surgical Instruments", "Gloves & Masks", "Sutures"] },
     { icon: <Pill className="w-12 h-12" />, title: "Pharmaceuticals", description: "Medications and treatments", items: ["Prescription Drugs", "OTC Medications", "Vaccines"] },
     { icon: <Heart className="w-12 h-12" />, title: "Patient Care", description: "Comfort and care items", items: ["Wheelchairs", "Hospital Beds", "Mobility Aids"] }
-  ];
+  ]
 
   return (
-    <main className="min-h-screen bg-white">
-      {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-b border-gray-100 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-2">
-              <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-xl flex items-center justify-center">
-                <Heart className="w-6 h-6 text-white" />
-              </div>
-              <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-700 bg-clip-text text-transparent">MedSupply Pro</span>
-            </div>
-            <div className="hidden md:flex items-center space-x-8">
-              <Link href="#products" className="text-gray-600 hover:text-blue-600 font-medium transition-colors">Products</Link>
-              <Link href="/about" className="text-gray-600 hover:text-blue-600 font-medium transition-colors">About</Link>
-              <Link href="/contact" className="text-gray-600 hover:text-blue-600 font-medium transition-colors">Contact</Link>
-              <Link href="/portal" className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white px-6 py-2 rounded-lg hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5">Portal Login</Link>
-            </div>
-          </div>
-        </div>
-      </nav>
+    <div className="min-h-screen bg-white">
+      <Navigation />
 
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center overflow-hidden pt-16">
@@ -237,6 +221,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-    </main>
-  );
+    </div>
+  )
 }

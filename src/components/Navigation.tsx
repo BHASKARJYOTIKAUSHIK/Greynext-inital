@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import { useRouter } from 'next/navigation'
 
 const navigation = [
   { name: 'Home', href: '/' },
@@ -15,9 +16,10 @@ const navigation = [
 
 export default function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const router = useRouter()
 
   return (
-    <header className="fixed w-full bg-white/90 backdrop-blur-sm z-50 shadow-sm">
+    <header className="fixed w-full bg-white/90           z-50 shadow-sm">
       <nav className="container mx-auto px-4 sm:px-6 lg:px-8" aria-label="Global">
         <div className="flex h-16 items-center justify-between">
           <div className="flex lg:flex-1">
@@ -54,49 +56,59 @@ export default function Navigation() {
         </div>
       </nav>
       {/* Mobile menu */}
-      <div className={`lg:hidden ${mobileMenuOpen ? 'fixed inset-0 z-50' : 'hidden'}`}>
-        <div className="fixed inset-0 bg-black/20" aria-hidden="true" />
-        <div className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
-          <div className="flex items-center justify-between">
-            <Link href="/" className="-m-1.5 p-1.5">
-              <span className="text-xl font-bold text-primary">MedSupply</span>
-            </Link>
-            <button
-              type="button"
-              className="-m-2.5 rounded-md p-2.5 text-gray-700"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              <span className="sr-only">Close menu</span>
-              <XMarkIcon className="h-6 w-6" aria-hidden="true" />
-            </button>
-          </div>
-          <div className="mt-6 flow-root">
-            <div className="-my-6 divide-y divide-gray-500/10">
-              <div className="space-y-2 py-6">
+      {mobileMenuOpen && (
+        <div className="fixed inset-0 z-50 flex flex-col bg-white">
+          {/* Overlay */}
+          <div
+            className="fixed inset-0 bg-black/20           z-40"
+            aria-hidden="true"
+            onClick={() => setMobileMenuOpen(false)}
+          />
+          {/* Menu panel */}
+          <div className="relative z-50 flex-1 flex flex-col">
+            <div className="flex items-center justify-between p-4 border-b">
+              <Link href="/" className="-m-1.5 p-1.5">
+                <span className="text-xl font-bold text-primary">MedSupply</span>
+              </Link>
+              <button
+                type="button"
+                className="-m-2.5 rounded-md p-2.5 text-gray-700"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <span className="sr-only">Close menu</span>
+                <XMarkIcon className="h-6 w-6" aria-hidden="true" />
+              </button>
+            </div>
+            <div className="flex-1 px-4 py-6 overflow-y-auto">
+              <div className="space-y-1">
                 {navigation.map((item) => (
-                  <Link
+                  <button
                     key={item.name}
-                    href={item.href}
-                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                    onClick={() => setMobileMenuOpen(false)}
+                    className="block w-full text-left rounded-lg px-3 py-4 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                    onClick={() => {
+                      setMobileMenuOpen(false)
+                      router.push(item.href)
+                    }}
                   >
                     {item.name}
-                  </Link>
+                  </button>
                 ))}
               </div>
-              <div className="py-6">
-                <Link
-                  href="/portal"
+              <div className="mt-8">
+                <button
                   className="btn-primary w-full text-center"
-                  onClick={() => setMobileMenuOpen(false)}
+                  onClick={() => {
+                    setMobileMenuOpen(false)
+                    router.push('/portal')
+                  }}
                 >
                   Portal Login
-                </Link>
+                </button>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </header>
   )
 } 

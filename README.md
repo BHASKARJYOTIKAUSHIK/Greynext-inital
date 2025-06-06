@@ -61,7 +61,7 @@ A modern, responsive website for a Medical Surgical Goods seller, built with Nex
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/medical-surgical.git
+   git clone https://github.com/BHASKARJYOTIKAUSHIK/Greynext-inital.git
    ```
 
 2. Install dependencies:
@@ -112,4 +112,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## Contact
 
 Your Name - [@yourtwitter](https://twitter.com/yourtwitter)
-Project Link: [https://github.com/yourusername/medical-surgical](https://github.com/yourusername/medical-surgical) 
+Project Link: [https://github.com/BHASKARJYOTIKAUSHIK/Greynext-inital](https://github.com/BHASKARJYOTIKAUSHIK/Greynext-inital) 
